@@ -8,5 +8,6 @@ import json
 def get_prods(request):
     body_unicode = request.body.decode("utf-8")
     body = json.loads(body_unicode)
+    body["limit"] = int(body["limit"])
     prods = scrap_items(*body.values())
     return Response(prods)
