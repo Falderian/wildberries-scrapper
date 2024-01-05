@@ -22,19 +22,16 @@ def get_prod_info(prod_id, browser):
 
     data = json.loads(requests.get(url).text)
     meta_tags = browser.find_elements(By.TAG_NAME, "meta")
-    metas = []
+    metas = list()
     for meta_tag in meta_tags:
         meta = dict()
         name = meta_tag.get_attribute("name")
         content = meta_tag.get_attribute("content")
-        if not name or not content:
-            continue
-        meta["name"] = name
-        meta["content"] = content
-
+        meta["name"] = name or "empty name"
+        meta["content"] = content or "no content"
         metas.append(meta)
 
-    return data["description"], feedbacks, meta
+    return data["description"], feedbacks, metas
 
 
 def get_feedbacks(browser):

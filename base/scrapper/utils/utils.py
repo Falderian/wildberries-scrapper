@@ -12,9 +12,7 @@ def scrap_items(query, limit, sort_type):
 
     search_url = f"https://search.wb.ru/exactmatch/ru/common/v4/search?TestGroup=mmr_21&TestID=388&appType=1&curr=rub&dest=-1257786&resultset=catalog&sort={sort_type}&spp=27&suppressSpellcheck=false&query={query}"
     req = requests.get(search_url)
-    print(len(json.loads(req.text)["data"]["products"]))
     raw_products = json.loads(req.text)["data"]["products"][:limit]
-    print(len(raw_products))
 
     products = []
     for raw_prod in raw_products:
